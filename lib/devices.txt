@@ -1,0 +1,9 @@
+Devices in the T5 E-paper S3 Pro:
+
+- BQ25896 -> Battery charge management & system power path
+- BQ27220YZFR -> Battery charge monitor
+- ME6217-3.3V -> LDO Regulator
+- PCA9535PW -> I/O expander
+- PT4103B23F -> backlight
+- PCF8563TS -> Real-time clock
+- TPS651851RSLR -> E-ink power supply
