@@ -15,8 +15,9 @@ SemaphoreHandle_t i2c_lock; // For now we only use one i2c bus
 void i2c_init();
 
 void app_main() {
-    i2c_init(); // Initialize all i2c device 
-    
+    esp_err_t status;
+    i2c_init(); // Initialize all i2c device
+    pca9535a_init(&dev_handle_pca9535a);
     
 
 }
@@ -35,16 +36,17 @@ void i2c_init(){
     i2c_device_config_t dev_tps651851_cfg = {
         .dev_addr_length = I2C_ADDR_BIT_LEN_7,
         .device_address = 0x68,
-        .scl_speed_hz = 100000
+        .scl_speed_hz = 400000
     };
     i2c_device_config_t dev_pca9535a_cfg = {
         .dev_addr_length = I2C_ADDR_BIT_LEN_7,
         .device_address = 0x20,
-        .scl_speed_hz = 100000
+        .scl_speed_hz = 400000
     };
     
     ESP_ERROR_CHECK(i2c_master_bus_add_device(i2c_bus_handle, &dev_tps651851_cfg, &dev_handle_tps651861));
     ESP_ERROR_CHECK(i2c_master_bus_add_device(i2c_bus_handle, &dev_pca9535a_cfg, &dev_handle_pca9535a));
-
+    vTaskDelay(pdMS_TO_TICKS(50));
+    ESP_LOGI("I2C INIT", "I2C Initialized.\n");
     
 }
